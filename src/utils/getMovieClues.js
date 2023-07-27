@@ -1,9 +1,10 @@
 import fetch from "node-fetch";
+import { isJSON } from "./isJSONstring.js";
 
 const apiUrl = "https://api.openai.com/v1/chat/completions";
 
 export async function getMovieClues(movieName) {
-  const prompt = `Give me 4 hints about the movie ${movieName} (from difficult to easy). Make sure the hint doesn't have the movie name on it. Format as an array of strings`;
+  const prompt = `Please provide four hints about the movie ${movieName} without mentioning its name. Format your response as an array of strings.`;
   try {
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -20,7 +21,16 @@ export async function getMovieClues(movieName) {
       },
     });
     const data = await response.json();
+
     const content = data.choices[0].message.content;
+
+    console.log(typeof content, content);
+    if (!isJSON(content)) {
+      const regex = /\d+\.\s+/;
+      const clues = content.split(regex).filter(Boolean);
+
+      return clues;
+    }
     const clues = JSON.parse(content);
     return clues;
   } catch (error) {

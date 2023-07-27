@@ -10,17 +10,19 @@ class MovieController {
   }
 
   async updateMovieOfDay() {
-    const oldMovieOfDay = await MovieRepository.findAllMovieOfDay();
+    // const oldMovieOfDay = await MovieRepository.findAllMovieOfDay();
 
-    oldMovieOfDay && (await MovieRepository.deleteMovieOfDay(oldMovieOfDay.id));
+    // oldMovieOfDay && (await MovieRepository.deleteMovieOfDay(oldMovieOfDay.id));
 
     const { id, title } = await MovieRepository.findRandomMovie();
 
     const clues = await getMovieClues(title);
 
-    await MovieRepository.updateWasUsedOnMovieTable({ id });
+    console.log(clues);
 
-    await MovieRepository.createMovieOfDay({ id, clues });
+    // await MovieRepository.updateWasUsedOnMovieTable({ id });
+
+    // await MovieRepository.createMovieOfDay({ id, clues });
   }
 }
 

@@ -6,14 +6,19 @@ import env from "dotenv";
 
 env.config();
 
-const client = new Client({
-  host: `${process.env.DB_HOST}`,
-  port: `${process.env.DB_PORT}`,
-  database: `${process.env.DB_NAME}`,
-  user: `${process.env.DB_USER}`,
-  password: `${process.env.DB_PASSWORD}`,
-  ssl: process.env.DB_SSL === "true" ? true : false,
-});
+const isProd = process.env.NODE_ENV === "production";
+
+const client = isProd
+  ? new Client({
+      connectionString: `${process.env.DB_CONNECTION_STRING}`,
+    })
+  : new Client({
+      host: `${process.env.DB_HOST}`,
+      port: `${process.env.DB_PORT}`,
+      database: `${process.env.DB_NAME}`,
+      user: `${process.env.DB_USER}`,
+      password: `${process.env.DB_PASSWORD}`,
+    });
 
 client.connect((err) => {
   if (err) {
