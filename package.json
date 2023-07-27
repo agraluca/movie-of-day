@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon src/index.js",
-    "db": "node src/database/index.js"
+    "db": "node src/database/index.js",
+    "generateMovieQuery": "node src/utils/generateMovies/index.js"
   },
   "keywords": [],
   "author": "",

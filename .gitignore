@@ -1,6 +1,5 @@
 /node_modules
 yarn-error.log
-yarn.lock
 .env
 /src/utils/generateMovies/movies.json
 /src/utils/generateMovies/movies.sql

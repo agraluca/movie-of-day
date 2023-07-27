@@ -18,10 +18,10 @@ const getMovies = async () => {
     const data = await res.json();
     return data.results;
   };
-
-  const numPages = 45;
+  const startPage = 46;
+  const endPage = 90;
   const fetchPromises = [];
-  for (let index = 1; index <= numPages; index++) {
+  for (let index = startPage; index <= endPage; index++) {
     fetchPromises.push(fetchMovies(index));
   }
 
