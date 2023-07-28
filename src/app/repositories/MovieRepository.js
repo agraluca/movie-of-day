@@ -15,11 +15,21 @@ class MovieRepository {
     return row;
   }
 
+  async findLastMovieOfDay() {
+    const [row] = await db.query(`
+      SELECT * FROM movie_of_day
+      ORDER BY id DESC
+      LIMIT 1;
+    `);
+    return row;
+  }
+
   async findMovieOfDay() {
     const [row] = await db.query(`
       SELECT movie_of_day.clues, movies.*
       FROM movie_of_day
       INNER JOIN movies ON movie_of_day.movie_id = movies.id
+      ORDER BY movie_of_day.id DESC
       LIMIT 1;
     `);
     return row;

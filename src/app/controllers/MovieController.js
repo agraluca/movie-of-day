@@ -10,10 +10,6 @@ class MovieController {
   }
 
   async updateMovieOfDay() {
-    const oldMovieOfDay = await MovieRepository.findAllMovieOfDay();
-
-    oldMovieOfDay && (await MovieRepository.deleteMovieOfDay(oldMovieOfDay.id));
-
     const { id, title } = await MovieRepository.findRandomMovie();
 
     const clues = await getMovieClues(title);
@@ -23,6 +19,8 @@ class MovieController {
     await MovieRepository.updateWasUsedOnMovieTable({ id });
 
     await MovieRepository.createMovieOfDay({ id, clues });
+
+    return;
   }
 }
 
