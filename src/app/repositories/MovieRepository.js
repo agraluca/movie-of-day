@@ -35,6 +35,17 @@ class MovieRepository {
     return row;
   }
 
+  async findMovieOfDayTitle() {
+    const [row] = await db.query(`
+      SELECT movies.title
+      FROM movie_of_day
+      INNER JOIN movies ON movie_of_day.movie_id = movies.id
+      ORDER BY movie_of_day.id DESC
+      LIMIT 1;
+    `);
+    return row;
+  }
+
   async updateWasUsedOnMovieTable({ id }) {
     const [row] = await db.query(
       `

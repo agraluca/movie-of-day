@@ -16,3 +16,7 @@ CREATE TABLE IF NOT EXISTS movie_of_day (
   clues VARCHAR[4] NOT NULL,
   FOREIGN KEY(movie_id) REFERENCES movies(id)
 );
+
+CREATE TABLE  IF NOT EXISTS games_played (
+    total INT NOT NULL DEFAULT 0
+);
