@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
     "db": "node src/database/index.js",
     "generateMovieQuery": "node src/utils/generateMovies/index.js"
   },
